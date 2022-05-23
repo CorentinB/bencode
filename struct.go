@@ -15,6 +15,7 @@ import (
 	"io"
 	"reflect"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -51,6 +52,8 @@ func setint(val reflect.Value, i int64) {
 		v.SetUint(uint64(i))
 	case reflect.Interface:
 		v.Set(reflect.ValueOf(i))
+	case reflect.String:
+		v.SetString(strconv.Itoa(int(i)))
 	default:
 		panic("setint called for bogus type: " + val.Kind().String())
 	}
